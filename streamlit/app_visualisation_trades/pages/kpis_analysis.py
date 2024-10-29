@@ -21,5 +21,6 @@ ax.ylabel(y_col)
 ax.grid()
 st.pyplot(fig)
 
+st.dataframe(df_kpis, hide_index = True)
 
 
