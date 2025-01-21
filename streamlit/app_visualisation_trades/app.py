@@ -22,8 +22,9 @@ random.shuffle(trades)
 
 init_capital = 100000
 evolution = 1 + np.array(trades)/100
-all_capital_evolution = pd.Series([init_capital] + list(init_capital*evolution.cumprod()))
-final_capital = all_capital_evolution[-1]
+all_capital_evolution_list = [init_capital] + list(init_capital*evolution.cumprod())
+all_capital_evolution_series = pd.Series(all_capital_evolution_list)
+final_capital = all_capital_evolution_list[-1]
 
 fig, ax = plt.subplots()
 ax.plot(all_capital_evolution)
@@ -35,9 +36,8 @@ st.pyplot(fig)
 sharpe = np.round(np.mean(trades) / np.std(trades), 2)
 sqn = sharpe * N
 
-
-peak_capital = all_capital_evolution.cummax()  # Track the peak capital at each point
-drawdown = all_capital_evolution - peak_capital  # Difference from the peak
+peak_capital = all_capital_evolution_series.cummax()  # Track the peak capital at each point
+drawdown = all_capital_evolution_series - peak_capital  # Difference from the peak
 drawdown_pct = 100*drawdown / peak_capital  # Drawdown as a percentage
 max_drawdown = abs(min(drawdown_pct))
 
