@@ -48,5 +48,5 @@ kpis = {'capital_initial': init_capital,
         'sqn': sqn, 
         'max_drawdown': max_drawdown}
 
-df_kpis = pd.DataFrame.from_dict(kpis, orient = 'index')
-st.dataframe(df_kpis)
+df_kpis = pd.DataFrame.from_dict(kpis, orient = 'index').T
+st.dataframe(df_kpis, hide_index = True)
