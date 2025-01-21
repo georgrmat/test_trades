@@ -27,7 +27,7 @@ all_capital_evolution_series = pd.Series(all_capital_evolution_list)
 final_capital = all_capital_evolution_list[-1]
 
 fig, ax = plt.subplots()
-ax.plot(all_capital_evolution)
+ax.plot(all_capital_evolution_list)
 ax.set_xlabel('Temps')
 ax.set_ylabel('Prix')
 ax.set_title('Evolution du capital')
