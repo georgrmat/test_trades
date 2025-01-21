@@ -19,8 +19,10 @@ losses = yield_loss * np.ones(nb_losing_trades)
 trades = list(wins) + list(losses)
 random.shuffle(trades)
 
+init_capital = 100000
 evolution = 1 + np.array(trades)/100
-all_capital_evolution = [100000] + list(100000*evolution.cumprod())
+all_capital_evolution = np.array([init_capital] + list(init_capital*evolution.cumprod()))
+final_capital = all_capital_evolution[-1]
 
 fig, ax = plt.subplots()
 ax.plot(all_capital_evolution)
@@ -29,15 +31,21 @@ ax.set_ylabel('Prix')
 ax.set_title('Evolution du capital')
 st.pyplot(fig)
 
-init_capital = 100000
 sharpe = np.round(np.mean(trades) / np.std(trades), 2)
 sqn = sharpe * N
+
+
+peak_capital = all_capital_evolution.cummax()  # Track the peak capital at each point
+drawdown = all_capital_evolution - peak_capital  # Difference from the peak
+drawdown_pct = 100*drawdown / peak_capital  # Drawdown as a percentage
+max_drawdown = abs(min(drawdown_pct))
+
 kpis = {'capital_initial': init_capital,
         'capital_final': final_capital,
         'rendement': 100 * (final_capital - init_capital)/init_capital,
         'sharpe': sharpe,
         'sqn': sqn, 
-        'drawdown': 0}
+        'max_drawdown': max_drawdown}
 
 df_kpis = pd.DataFrame(kpis)
 st.dataframe(df_kpis)
