@@ -21,7 +21,7 @@ random.shuffle(trades)
 
 init_capital = 100000
 evolution = 1 + np.array(trades)/100
-all_capital_evolution = np.array([init_capital] + list(init_capital*evolution.cumprod()))
+all_capital_evolution = pd.Series([init_capital] + list(init_capital*evolution.cumprod()))
 final_capital = all_capital_evolution[-1]
 
 fig, ax = plt.subplots()
