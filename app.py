@@ -43,6 +43,8 @@ max_drawdown = get_max_drawdown(all_capital_evolution_series)
 kpis = {'capital_initial': init_capital,
         'capital_final': final_capital,
         'rendement': 100 * (final_capital - init_capital)/init_capital,
+        'rr': yield_win / yield_loss if yield_loss != 0 else 0,
+        'win_rate': win_rate,
         'sharpe': sharpe,
         'sqn': sqn, 
         'max_drawdown': max_drawdown}
