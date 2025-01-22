@@ -1,4 +1,4 @@
-from functions import get_sharpe, get_sqn, get_max_drawdown
+from streamlit.app_visualisation_trades.functions import get_sharpe, get_sqn, get_max_drawdown
 import streamlit as st 
 import pandas as pd
 import numpy as np
