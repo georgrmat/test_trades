@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+from functions import get_sharpe, get_sqn, get_max_drawdown
+
 
 nb_trades_per_day = st.sidebar.slider("Nombre de trades par jour", 1, 50, 10)
 nb_days = st.sidebar.slider("Nombre de jours de simulation", 1, 1500, 100)
@@ -33,13 +35,10 @@ ax.set_ylabel('Prix')
 ax.set_title('Evolution du capital')
 st.pyplot(fig)
 
-sharpe = np.round(np.mean(trades) / np.std(trades), 2)
-sqn = sharpe * N
+sharpe = np.round(get_sharpe(trades), 2)
+sqn = np.round(get_sqn(sharpe, N), 2)
+max_drawdown = get_max_drawdown(all_capital_evolution_series)
 
-peak_capital = all_capital_evolution_series.cummax()  # Track the peak capital at each point
-drawdown = all_capital_evolution_series - peak_capital  # Difference from the peak
-drawdown_pct = 100*drawdown / peak_capital  # Drawdown as a percentage
-max_drawdown = abs(min(drawdown_pct))
 
 kpis = {'capital_initial': init_capital,
         'capital_final': final_capital,
