@@ -1,9 +1,10 @@
+from functions import get_sharpe, get_sqn, get_max_drawdown
 import streamlit as st 
 import pandas as pd
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-from functions import get_sharpe, get_sqn, get_max_drawdown
+
 
 
 nb_trades_per_day = st.sidebar.slider("Nombre de trades par jour", 1, 50, 10)
