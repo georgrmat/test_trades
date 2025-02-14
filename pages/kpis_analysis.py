@@ -39,7 +39,7 @@ if pairplot_cols:
     st.pyplot(fig)  # Display plot in Streamlit
     
     df_corr = df_kpis[all_cols].corr()
-    st.dataframe(df_corr, hide_index = True)
+    st.dataframe(df_corr)
 else:
     st.warning("Please select at least one column for the pairplot.")
 
