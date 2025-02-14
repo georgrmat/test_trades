@@ -31,14 +31,14 @@ st.pyplot(fig)
 
 pairplot_cols = st.multiselect("columns to compare", df_kpis.columns.tolist())
 hue_col = st.selectbox("color column", df_kpis.columns.tolist())
-
+all_cols = pairplot_cols + [hue_col]
 
 if pairplot_cols:
     fig = plt.figure(figsize=(8, 6))  # Create a figure
-    sns.pairplot(df_kpis[pairplot_cols], hue=hue_col)  # Corrected pairplot
+    sns.pairplot(df_kpis[all_cols], hue=hue_col)  # Corrected pairplot
     st.pyplot(fig)  # Display plot in Streamlit
     
-    df_corr = df_kpis[pairplot_cols + [hue_col]].corr()
+    df_corr = df_kpis[all_cols].corr()
     st.dataframe(df_corr, hide_index = True)
 else:
     st.warning("Please select at least one column for the pairplot.")
