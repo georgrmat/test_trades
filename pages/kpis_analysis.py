@@ -34,9 +34,11 @@ hue_col = st.selectbox("color column", df_kpis.columns.tolist())
 all_cols = pairplot_cols + [hue_col]
 
 if pairplot_cols:
+    st.header('Pairplot')
     fig = sns.pairplot(df_kpis[all_cols], hue=hue_col)
     st.pyplot(fig)  # Display plot in Streamlit
     
+    st.header('Correlation dataframe')
     df_corr = df_kpis[all_cols].corr()
     st.dataframe(df_corr)
 else:
